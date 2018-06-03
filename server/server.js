@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', (request, response) =>  response.sendFile(`${__dirname}/index.html`));
 
-app.post('/submitted', (request, response) => {
+app.post('/submit', (request, response) => {
   const postBody = request.body;
   console.log(postBody);
   response.send(postBody);
