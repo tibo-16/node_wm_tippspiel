@@ -11,6 +11,8 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+const port = process.env.PORT || 3000;
+
 const middlewares = [
   helmet(),
   layout(),
@@ -42,4 +44,4 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
-app.listen(3000, () => console.info('Application running on port 3000'));
+app.listen(port, () => console.info(`Application running on port ${port}`));
