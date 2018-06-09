@@ -5,7 +5,6 @@ const express = require('express');
 const layout = require('express-layout');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-const session = require('express-session');
 
 const routes = require('./routes');
 const app = express();
@@ -19,19 +18,7 @@ const middlewares = [
   helmet(),
   layout(),
   bodyParser.urlencoded({extended:true}),
-  express.static(path.join(__dirname, 'public')),
-  session({
-    secret: 'super-secret-key',
-    key: 'super-secret-cookie',
-    name: 'sessionId',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { 
-      secure: true,
-      httpOnly: true,
-      maxAge: 60000
-    }
-  })
+  express.static(path.join(__dirname, 'public'))
 ];
 
 app.use(middlewares);
