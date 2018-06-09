@@ -1,2 +1,59 @@
-<h2>This is the voting site</h2>
-<% console.log(name) %>
+<div class="inline-form">
+    <div class="card border-0 shadow p-3 mb-5 bg-white rounded" id="card" style="width: 95%;">
+        <div class="card-body">
+            <form>
+                <input name="day" type="hidden" value="<%= day %>" />
+                <input name="player" type="hidden" value="<%= player %>" />
+                <input name="games" type="hidden" value="<%= games %>" />
+
+                <div class="form-groud">
+                    <h4>
+                        <%= name %>
+                    </h4>
+                    </br>
+                </div>
+
+                <% for (i = 0; i < games.length; i++) { %>
+
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-5">
+                                <label for="home<%= i %>">
+                                    <%= games[i].homeTeam %>
+                                </label>
+                                <input type="number" name="home<%= i %>" id="home<%= i %>" class="form-control">
+                            </div>
+                            <div class="col-2">
+                                    <label for="vs<%= i %>" class="text-light">
+                                        text
+                                        </label>
+                                        <input type="text" id="vs<%= i %>" readonly class="form-control-plaintext text-center" value="vs.">
+                            </div>
+                            <div class="col-5">
+                                <label for="away<%= i %>">
+                                    <%= games[i].awayTeam %>
+                                </label>
+                                <input type="number" name="away<%= i %>" id="away<%= i %>" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <% } %>
+                        </br>
+                        <div class="form-group">
+                            <button class="btn btn-dark btn-lg btn-block" formmethod="POST" formaction="/createGameday" formtarget="_self">Speichern</button>
+                        </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>

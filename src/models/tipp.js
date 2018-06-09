@@ -1,23 +1,15 @@
 const mongoose = require('mongoose');
 
-var GamedaySchema = new mongoose.Schema({
+var TippSchema = new mongoose.Schema({
     day: {
         type: String,
         required: true,
         unique: true
     },
-    name: {
+    player: {
         type: String,
         required: true,
         minlength: 1
-    },
-    deadline: {
-        type: String,
-        required: true
-    },
-    completed: {
-        type: Boolean,
-        default: false
     },
     games: [{
         homeTeam: {
@@ -28,15 +20,15 @@ var GamedaySchema = new mongoose.Schema({
             type: String,
             require: true
         },
-        result: {
+        tipp: {
             type: String,
             default: null
         }
     }]
 });
 
-var GameDay = mongoose.model('GameDay', GamedaySchema);
+var Tipp = mongoose.model('Tipp', TippSchema);
 
 module.exports = {
-    GameDay
+    Tipp
 };
