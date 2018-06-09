@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node src/server.js"
   },
+  "engines": {
+    "node": "8.11.2"
+  },
   "author": "Tobias Emrich",
   "license": "ISC",
   "dependencies": {
