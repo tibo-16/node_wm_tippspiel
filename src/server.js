@@ -6,6 +6,8 @@ const layout = require('express-layout');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 
+var {mongoose} = require('./db/mongoose');
+
 const routes = require('./routes');
 const app = express();
 
