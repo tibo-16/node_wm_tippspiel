@@ -1,5 +1,5 @@
 const express = require('express');
-const moment = require('moment');
+const moment = require('moment-timezone');
 const {ObjectID} = require('mongodb');
 const bodyParser = require('body-parser');
 
@@ -64,7 +64,7 @@ names.forEach((name) => {
                 });
             }
 
-            console.log(moment.locale('de'));
+            console.log(moment.tz('Germany').format());
 
             if (moment(gameday.day + ' ' + gameday.deadline).isBefore(moment())) {
                 return res.render('failure', {
