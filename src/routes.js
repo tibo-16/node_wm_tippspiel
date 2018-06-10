@@ -7,6 +7,7 @@ var {mongoose} = require('./db/mongoose');
 var {GameDay} = require('./models/gameday');
 var {Tipp} = require('./models/tipp');
 var {Ranking} = require('./models/ranking');
+const {calculatePoints} = require('./utils');
 
 const router = express.Router();
 
@@ -128,26 +129,65 @@ router.get('/ma/ranking', async (req, res) => {
     res.send(ranking);
 });
 
+router.get('/ma/setResult/:day&:results', async (req, res) => {
+    // Beispiel: /ma/setResult/2018-06-14&2:1-1:1-3:1
+    var results = req.params.results.split('-');
+
+    var gameday = await GameDay.findOne({
+        day: req.params.day
+    });
+
+    for(i = 0; i < results.length; i++) {
+        gameday.games[i].result = results[i];
+    }
+    gameday.completed = true;
+
+    var newGameday = await GameDay.findOneAndUpdate({
+        day: req.params.day
+    }, {$set: gameday}, {new: true})
+
+    // Ranking anpassen
+    var ranking = await Ranking.findOne();
+    var names = ["fabi", "maddin", "rudi", "tobi"];
+
+    for (i = 0; i < names.length; i++) {
+        var tipp = await Tipp.findOne({
+            day: req.params.day,
+            player: names[i]
+        });
+
+        if (tipp) {
+            for (g = 0; g < newGameday.games.length; g++) {
+                ranking[names[i]] += calculatePoints(newGameday.games[g].result, tipp.games[g].tipp);
+            }
+        }
+    }
+
+    await Ranking.findOneAndUpdate({}, {$set: ranking}, {new: true});
+    
+    res.send(newGameday);
+});
+
 // NUR FÜR MICH
 router.get('/createGamedayTest', (req, res) => {
     var gameday = new GameDay({
-        day: "2018-06-19",
-        name: "Gruppenphase",
-        deadline: "14:00",
+        day: "2018-06-14",
+        name: "Eröffnung",
+        deadline: "17:00",
         games: [{
-            homeTeam: "Kolumbien",
-            awayTeam: "Japan"
-        }, {
-            homeTeam: "Polen",
-            awayTeam: "Senegal"
-        }, {
             homeTeam: "Russland",
-            awayTeam: "Ägypten"
+            awayTeam: "Saudi-Arabien"
+        }, {
+            homeTeam: "Deutschland",
+            awayTeam: "England"
+        }, {
+            homeTeam: "Spanien",
+            awayTeam: "Mexiko"
         }]
     });
 
     gameday.save().then((doc) => {
-        res.render('index');
+        res.send(gameday);
     }, (err) => {
         res.status(400).send(err);
     });
