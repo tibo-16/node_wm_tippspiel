@@ -64,8 +64,6 @@ names.forEach((name) => {
                 });
             }
 
-            console.log(moment.locale('de').format());
-
             if (moment(gameday.day + ' ' + gameday.deadline).isBefore(moment())) {
                 return res.render('failure', {
                     message: `Die Deadline für diesen Spieltag ist leider angelaufen. Sie war um ${gameday.deadline} Uhr!`
