@@ -1,5 +1,5 @@
 const express = require('express');
-const moment = require('moment');
+var moment = require('moment');
 const {ObjectID} = require('mongodb');
 const bodyParser = require('body-parser');
 
@@ -8,6 +8,8 @@ var {GameDay} = require('./models/gameday');
 var {Tipp} = require('./models/tipp');
 var {Ranking} = require('./models/ranking');
 const {calculatePoints} = require('./utils');
+
+moment.locale('de');
 
 const router = express.Router();
 
@@ -63,6 +65,8 @@ names.forEach((name) => {
                     message: 'Es ist noch kein weiterer Spieltag verfügbar!'
                 });
             }
+
+            console.log(moment());
 
             if (moment(gameday.day + ' ' + gameday.deadline).isBefore(moment())) {
                 return res.render('failure', {
