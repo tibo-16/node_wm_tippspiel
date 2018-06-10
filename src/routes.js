@@ -13,6 +13,10 @@ router.get('/ma', (req, res) => {
     res.render('index');
 });
 
+router.get('/', (req, res) => {
+    res.redirect('/ma');
+});
+
 var names = ['fabi', 'maddin', 'rudi', 'tobi']
 names.forEach((name) => {
     router.post(`/ma/${name}`, async (req, res) => {
