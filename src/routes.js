@@ -64,7 +64,7 @@ names.forEach((name) => {
                 });
             }
 
-            console.log(moment());
+            console.log(moment.locale('de'));
 
             if (moment(gameday.day + ' ' + gameday.deadline).isBefore(moment())) {
                 return res.render('failure', {
