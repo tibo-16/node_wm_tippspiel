@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 var TippSchema = new mongoose.Schema({
     day: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     player: {
         type: String,

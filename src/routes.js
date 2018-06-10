@@ -19,16 +19,22 @@ names.forEach((name) => {
         try {
             const gameday = await GameDay.findOne({completed: false});
             if (!gameday) {
-                return res.status(404).send('Noch kein Speiltag verfügbar!');
+                return res.status(404).render('info', {
+                    message: 'Es ist noch kein weiterer Spieltag verfügbar!'
+                });
             }
 
             if (moment(gameday.day + ' ' + gameday.deadline).isBefore(moment())) {
-                return res.send(`Die Deadline für diesen Spieltag ist leider angelaufen. Sie war um ${gameday.deadline} Uhr!`);
+                return res.render('failure', {
+                    message: `Die Deadline für diesen Spieltag ist leider angelaufen. Sie war um ${gameday.deadline} Uhr!`
+                });
             }
 
             const tipp = await Tipp.findOne({day: gameday.day, player: name});
             if (tipp) {
-                return res.send('Du hast diesen Spieltag schon getippt!');
+                return res.render('info', {
+                    message: 'Du hast diesen Spieltag schon getippt!'
+                });
             }
 
             res.render('vote', {
@@ -46,16 +52,22 @@ names.forEach((name) => {
         try {
             const gameday = await GameDay.findOne({completed: false});
             if (!gameday) {
-                return res.status(404).send('Noch kein Speiltag verfügbar!');
+                return res.status(404).render('info', {
+                    message: 'Es ist noch kein weiterer Spieltag verfügbar!'
+                });
             }
 
             if (moment(gameday.day + ' ' + gameday.deadline).isBefore(moment())) {
-                return res.send(`Die Deadline für diesen Spieltag ist leider angelaufen. Sie war um ${gameday.deadline} Uhr!`);
+                return res.render('failure', {
+                    message: `Die Deadline für diesen Spieltag ist leider angelaufen. Sie war um ${gameday.deadline} Uhr!`
+                });
             }
 
             const tipp = await Tipp.findOne({day: gameday.day, player: name});
             if (tipp) {
-                return res.send('Du hast diesen Spieltag schon getippt!');
+                return res.render('info', {
+                    message: 'Du hast diesen Spieltag schon getippt!'
+                });
             }
 
             res.render('vote', {
@@ -67,13 +79,40 @@ names.forEach((name) => {
         } catch (err) {
             res.status(400).send(err);
         }
-
     });
 });
 
-router.post('/createTipp', (req, res) => {
-    console.log(req.body);
-    res.status(200).send();
+router.post('/createTipp', async (req, res) => {
+    let checkTipp = await Tipp.findOne({day: req.body.day, player: req.body.player});
+    if (checkTipp) {
+        return res.render('info', {
+            message: 'Du hast diesen Spieltag schon getippt!'
+        });
+    }
+
+    let gameday = await GameDay.findOne({day: req.body.day});
+    var gamesArray = [];
+
+    for (i = 0; i < gameday.games.length; i++) {
+        gamesArray.push({
+            homeTeam: gameday.games[i].homeTeam,
+            awayTeam: gameday.games[i].awayTeam,
+            tipp: req.body["home" + i] + ":" + req.body["away" + i]
+        });
+    }
+
+    const tipp = new Tipp({
+        day: gameday.day,
+        player: req.body.player,
+        games: gamesArray
+    });
+
+    try {
+        await tipp.save();
+        res.status(200).render('success');
+    } catch (err) {
+        res.status(400).send(err);
+    }
 });
 
 router.get('/createGamedayTest', (req, res) => {
