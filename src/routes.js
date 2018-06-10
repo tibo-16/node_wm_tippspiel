@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 var {mongoose} = require('./db/mongoose');
 var {GameDay} = require('./models/gameday');
 var {Tipp} = require('./models/tipp');
+var {Ranking} = require('./models/ranking');
 
 const router = express.Router();
 
@@ -45,6 +46,7 @@ names.forEach((name) => {
                 day: gameday.day,
                 name: gameday.name,
                 games: gameday.games,
+                deadline: gameday.deadline,
                 player: name
             });
         } catch (err) {
@@ -78,6 +80,7 @@ names.forEach((name) => {
                 day: gameday.day,
                 name: gameday.name,
                 games: gameday.games,
+                deadline: gameday.deadline,
                 player: name
             });
         } catch (err) {
@@ -119,20 +122,27 @@ router.post('/createTipp', async (req, res) => {
     }
 });
 
+router.get('/ma/ranking', async (req, res) => {
+    const ranking = await Ranking.findOne();
+
+    res.send(ranking);
+});
+
+// NUR FÜR MICH
 router.get('/createGamedayTest', (req, res) => {
     var gameday = new GameDay({
-        day: "2018-06-15",
+        day: "2018-06-19",
         name: "Gruppenphase",
         deadline: "14:00",
         games: [{
-            homeTeam: "Ägypten",
-            awayTeam: "Uruguay"
+            homeTeam: "Kolumbien",
+            awayTeam: "Japan"
         }, {
-            homeTeam: "Marokko",
-            awayTeam: "Iran"
+            homeTeam: "Polen",
+            awayTeam: "Senegal"
         }, {
-            homeTeam: "Portugal",
-            awayTeam: "Spanien"
+            homeTeam: "Russland",
+            awayTeam: "Ägypten"
         }]
     });
 
