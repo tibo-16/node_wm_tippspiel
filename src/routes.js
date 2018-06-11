@@ -14,16 +14,16 @@ moment.locale('de');
 const router = express.Router();
 
 router.get('/ma', (req, res) => {
-    res.render('index');
+    res.redirect('/');
 });
 
 router.get('/', (req, res) => {
-    res.redirect('/ma');
+    res.render('index');
 });
 
-var names = ['fabi', 'maddin', 'rudi', 'tobi']
+var names = ['Fabi', 'Maddin', 'Rudi', 'Tobi']
 names.forEach((name) => {
-    router.post(`/ma/${name}`, async (req, res) => {
+    router.post(`/${name}`, async (req, res) => {
         try {
             const gameday = await GameDay.findOne({completed: false});
             if (!gameday) {
@@ -57,7 +57,7 @@ names.forEach((name) => {
         }
     });
 
-    router.get(`/ma/${name}`, async (req, res) => {
+    router.get(`/${name}`, async (req, res) => {
         try {
             const gameday = await GameDay.findOne({completed: false});
             if (!gameday) {
@@ -125,13 +125,13 @@ router.post('/createTipp', async (req, res) => {
     }
 });
 
-router.get('/ma/ranking', async (req, res) => {
+router.get('/ranking', async (req, res) => {
     const ranking = await Ranking.findOne();
 
     res.send(ranking);
 });
 
-router.get('/ma/setResult/:day&:results', async (req, res) => {
+router.get('/setResult/:day&:results', async (req, res) => {
     // Beispiel: /ma/setResult/2018-06-14&2:1-1:1-3:1
     var results = req.params.results.split('-');
 
@@ -150,7 +150,7 @@ router.get('/ma/setResult/:day&:results', async (req, res) => {
 
     // Ranking anpassen
     var ranking = await Ranking.findOne();
-    var names = ["fabi", "maddin", "rudi", "tobi"];
+    var names = ['Fabi', 'Maddin', 'Rudi', 'Tobi']
 
     for (i = 0; i < names.length; i++) {
         var tipp = await Tipp.findOne({
