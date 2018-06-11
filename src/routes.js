@@ -7,7 +7,7 @@ var {mongoose} = require('./db/mongoose');
 var {GameDay} = require('./models/gameday');
 var {Tipp} = require('./models/tipp');
 var {Ranking} = require('./models/ranking');
-const {calculatePoints} = require('./utils');
+const {calculatePoints, getRanking} = require('./utils');
 
 moment.locale('de');
 
@@ -128,7 +128,12 @@ router.post('/createTipp', async (req, res) => {
 router.get('/ranking', async (req, res) => {
     const ranking = await Ranking.findOne();
 
-    res.send(ranking);
+    const orderedRanking = getRanking(ranking);
+
+    res.render('ranking', {
+        names: orderedRanking.names,
+        points: orderedRanking.points
+    });
 });
 
 router.get('/setResult/:day&:results', async (req, res) => {

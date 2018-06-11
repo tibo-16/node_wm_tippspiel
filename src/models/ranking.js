@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
 
 var RankingSchema = new mongoose.Schema({
-    fabi: {
+    Fabi: {
         type: Number,
         required: true
     },
-    maddin: {
+    Maddin: {
         type: Number,
         required: true
     },
-    rudi: {
+    Rudi: {
         type: Number,
         required: true
     },
-    tobi: {
+    Tobi: {
         type: Number,
         required: true
     }
