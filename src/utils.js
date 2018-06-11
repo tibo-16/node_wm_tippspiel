@@ -15,15 +15,15 @@ const calculatePoints = (result, tipp) => {
     var tippDiff = tippHome - tippAway;
 
     if (resultDiff === tippDiff) {
-        return 3;
+        return 4;
     }
 
     if (resultDiff > 0 && tippDiff > 0) {
-        return 1;
+        return 3;
     }
 
     if (resultDiff < 0 && tippDiff < 0) {
-        return 1;
+        return 3;
     }
 
     return 0;
