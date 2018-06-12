@@ -28,7 +28,15 @@
                         <div class="form-row">
                             <div class="col-5">
                                 <div class="form-group">
-                                    <label class="font-weight-bold" for="home<%= i %>"><%= games[i].homeTeam %></label>
+                                    <div class="form-row">
+                                        <div class="col-1">
+                                            <img src="/pictures/<%= games[i].homeTeam %>.png" alt="<%= games[i].homeTeam %>">
+                                        </div>
+                                        <div class="col-11">
+                                            <label class="font-weight-bold" for="home<%= i %>"><%= games[i].homeTeam %></label>
+                                        </div>
+                                    </div>
+
                                     <select class="form-control" name="home<%= i %>" id="home<%= i %>">
                                       <option>0</option>
                                       <option>1</option>
@@ -57,7 +65,14 @@
                             </div>
                             <div class="col-5">
                                 <div class="form-group">
-                                    <label class="font-weight-bold" for="away<%= i %>"><%= games[i].awayTeam %></label>
+                                        <div class="form-row">
+                                                <div class="col-1">
+                                                    <img src="/pictures/<%= games[i].awayTeam %>.png" alt="<%= games[i].awayTeam %>">
+                                                </div>
+                                                <div class="col-11">
+                                                    <label class="font-weight-bold" for="away<%= i %>"><%= games[i].awayTeam %></label>
+                                                </div>
+                                            </div>
                                     <select class="form-control" name="away<%= i %>" id="away<%= i %>">
                                       <option>0</option>
                                       <option>1</option>
