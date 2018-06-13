@@ -9,6 +9,10 @@ var RankingSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    Robert: {
+        type: Number,
+        required: true
+    },
     Rudi: {
         type: Number,
         required: true
