@@ -175,6 +175,19 @@ router.get('/setResult/:day&:results', async (req, res) => {
     res.send(newGameday);
 });
 
+router.get('/setDone/:day', async (req, res) => {
+    var gameday = await GameDay.findOne({
+        day: req.params.day
+    });
+    gameday.completed = true;
+
+    var newGameday = await GameDay.findOneAndUpdate({
+        day: req.params.day
+    }, {$set: gameday}, {new: true})
+
+    res.send(newGameday);
+});
+
 // NUR FÜR MICH
 router.get('/createGamedayTest', (req, res) => {
     var gameday = new GameDay({
