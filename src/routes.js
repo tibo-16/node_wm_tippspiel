@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
     res.render('index');
 });
 
-var names = ['Fabi', 'Maddin', 'Rudi', 'Tobi']
+var names = ['Fabi', 'Maddin', 'Robert', 'Rudi', 'Tobi']
 names.forEach((name) => {
     router.post(`/${name}`, async (req, res) => {
         try {
@@ -155,7 +155,7 @@ router.get('/setResult/:day&:results', async (req, res) => {
 
     // Ranking anpassen
     var ranking = await Ranking.findOne();
-    var names = ['Fabi', 'Maddin', 'Rudi', 'Tobi']
+    var names = ['Fabi', 'Maddin', 'Robert', 'Rudi', 'Tobi']
 
     for (i = 0; i < names.length; i++) {
         var tipp = await Tipp.findOne({

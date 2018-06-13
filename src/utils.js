@@ -30,10 +30,10 @@ const calculatePoints = (result, tipp) => {
 };
 
 const getRanking = (ranking) => {
-    const points = [ranking["Fabi"], ranking["Maddin"], ranking["Rudi"], ranking["Tobi"]];
+    const points = [ranking["Fabi"], ranking["Maddin"], ranking["Robert"], ranking["Rudi"], ranking["Tobi"]];
     const orderedPoints = points.sort(function(a, b){return b-a});
 
-    const names = ["Fabi", "Maddin", "Rudi", "Tobi"];
+    const names = ["Fabi", "Maddin", "Robert", "Rudi", "Tobi"];
     const orderedNames = [];
 
     var hightestPoints = 0;
