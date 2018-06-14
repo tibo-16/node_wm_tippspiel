@@ -33,7 +33,7 @@ const getRanking = (ranking) => {
     const points = [ranking["Fabi"], ranking["Maddin"], ranking["Robert"], ranking["Rudi"], ranking["Tobi"]];
     const orderedPoints = points.sort(function(a, b){return b-a});
 
-    const names = ["Fabi", "Maddin", "Robert", "Rudi", "Tobi"];
+    const names = ["Tobi", "Rudi", "Robert", "Maddin", "Fabi"];
     const orderedNames = [];
 
     var hightestPoints = 0;
