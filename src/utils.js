@@ -41,7 +41,7 @@ const getRanking = (ranking) => {
     for (i = 0; i < names.length; i++) {
         for (p = 0; p < orderedPoints.length; p++) {
             if (ranking[names[i]] === orderedPoints[p]) {
-                if (orderedPoints[p] > hightestPoints) {
+                if (orderedPoints[p] >= hightestPoints) {
                     orderedNames.unshift(names[i]);
                     hightestPoints = orderedPoints[p];
                 } else {
