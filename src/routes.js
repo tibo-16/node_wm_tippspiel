@@ -32,16 +32,16 @@ names.forEach((name) => {
                 });
             }
 
-            if (moment(gameday.day + ' ' + gameday.deadline).isBefore(moment())) {
-                return res.render('failure', {
-                    message: `Die Deadline für diesen Spieltag ist leider angelaufen. Sie war um ${gameday.deadline} Uhr!`
-                });
-            }
-
             const tipp = await Tipp.findOne({day: gameday.day, player: name});
             if (tipp) {
                 return res.render('info', {
                     message: 'Du hast diesen Spieltag schon getippt!'
+                });
+            }
+
+            if (moment(gameday.day + ' ' + gameday.deadline).isBefore(moment())) {
+                return res.render('failure', {
+                    message: `Die Deadline für diesen Spieltag ist leider angelaufen. Sie war um ${gameday.deadline} Uhr!`
                 });
             }
 
@@ -66,16 +66,16 @@ names.forEach((name) => {
                 });
             }
 
-            if (moment(gameday.day + ' ' + gameday.deadline).isBefore(moment())) {
-                return res.render('failure', {
-                    message: `Die Deadline für diesen Spieltag ist leider angelaufen. Sie war um ${gameday.deadline} Uhr!`
-                });
-            }
-
             const tipp = await Tipp.findOne({day: gameday.day, player: name});
             if (tipp) {
                 return res.render('info', {
                     message: 'Du hast diesen Spieltag schon getippt!'
+                });
+            }
+
+            if (moment(gameday.day + ' ' + gameday.deadline).isBefore(moment())) {
+                return res.render('failure', {
+                    message: `Die Deadline für diesen Spieltag ist leider angelaufen. Sie war um ${gameday.deadline} Uhr!`
                 });
             }
 
