@@ -130,7 +130,7 @@ router.get('/ranking', async (req, res) => {
 
     //const orderedRanking = getRanking(ranking);
 
-    const names = ["Tobi", "Rudi", "Robert", "Maddin", "Fabi"];
+    const names = ["Fabi", "Maddin", "Robert", "Rudi", "Tobi"];
     const points = [ranking["Fabi"], ranking["Maddin"], ranking["Robert"], ranking["Rudi"], ranking["Tobi"]];
 
     res.render('ranking', {
