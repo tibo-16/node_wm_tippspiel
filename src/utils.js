@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 const calculatePoints = (result, tipp) => {
     if (result === tipp) {
         return 6;
@@ -30,26 +32,31 @@ const calculatePoints = (result, tipp) => {
 };
 
 const getRanking = (ranking) => {
-    const points = [ranking["Fabi"], ranking["Maddin"], ranking["Robert"], ranking["Rudi"], ranking["Tobi"]];
-    const orderedPoints = points.sort(function(a, b){return b-a});
+    var array = [{
+        'player': 'Fabi',
+        'points': ranking["Fabi"]
+    }, {
+        'player': 'Maddin',
+        'points': ranking["Maddin"]
+    }, {
+        'player': 'Robert',
+        'points': ranking["Robert"]
+    }, {
+        'player': 'Rudi',
+        'points': ranking["Rudi"]
+    }, {
+        'player': 'Tobi',
+        'points': ranking["Tobi"]
+    }];
 
-    const names = ["Tobi", "Rudi", "Robert", "Maddin", "Fabi"];
-    const orderedNames = [];
-
-    var hightestPoints = 0;
-
-    for (i = 0; i < names.length; i++) {
-        for (p = 0; p < orderedPoints.length; p++) {
-            if (ranking[names[i]] === orderedPoints[p]) {
-                if (orderedPoints[p] >= hightestPoints) {
-                    orderedNames.unshift(names[i]);
-                    hightestPoints = orderedPoints[p];
-                } else {
-                    orderedNames.push(names[i]);
-                }
-                break;
-            }
-        }
+    const sortedArray = _.sortBy(array, ['points', 'player']);
+    console.log(sortedArray);
+    var orderedNames = [];
+    var orderedPoints = [];
+    
+    for (i = 4; i >= 0; i--) {
+        orderedNames.push(sortedArray[i].player);
+        orderedPoints.push(sortedArray[i].points);
     }
 
     return {

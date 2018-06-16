@@ -128,14 +128,11 @@ router.post('/createTipp', async (req, res) => {
 router.get('/ranking', async (req, res) => {
     const ranking = await Ranking.findOne();
 
-    //const orderedRanking = getRanking(ranking);
-
-    const names = ["Fabi", "Maddin", "Robert", "Rudi", "Tobi"];
-    const points = [ranking["Fabi"], ranking["Maddin"], ranking["Robert"], ranking["Rudi"], ranking["Tobi"]];
+    const orderedRanking = getRanking(ranking);
 
     res.render('ranking', {
-        names: names,
-        points: points
+        names: orderedRanking.names,
+        points: orderedRanking.points
     });
 });
 
