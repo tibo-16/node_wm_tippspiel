@@ -34,8 +34,12 @@ names.forEach((name) => {
 
             const tipp = await Tipp.findOne({day: gameday.day, player: name});
             if (tipp) {
-                return res.render('info', {
-                    message: 'Du hast diesen Spieltag schon getippt!'
+                return res.render('voted', {
+                    day: gameday.day,
+                    name: gameday.name,
+                    games: tipp.games,
+                    deadline: gameday.deadline,
+                    player: name
                 });
             }
 
@@ -68,8 +72,12 @@ names.forEach((name) => {
 
             const tipp = await Tipp.findOne({day: gameday.day, player: name});
             if (tipp) {
-                return res.render('info', {
-                    message: 'Du hast diesen Spieltag schon getippt!'
+                return res.render('voted', {
+                    day: gameday.day,
+                    name: gameday.name,
+                    games: tipp.games,
+                    deadline: gameday.deadline,
+                    player: name
                 });
             }
 
