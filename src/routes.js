@@ -162,6 +162,34 @@ router.get('/ranking', async (req, res) => {
     });
 });
 
+router.get('/tipps', async (req, res) => {
+    const gameday = await GameDay.findOne({completed: true}).sort({_id: 'desc'});
+    if (!gameday) {
+        return res.status(404).render('info', {
+            message: "Kein Spieltag gefunden!"
+        });
+    }
+
+    const names = ['Fabi', 'Maddin', 'Robert', 'Rudi', 'Tobi'];
+    var tipps = [];
+
+    for (i = 0; i < names.length; i++) {
+        var tipp = await Tipp.findOne({
+            day: gameday.day,
+            player: names[i]
+        });
+
+        if (tipp) {
+            tipps.push(tipp);
+        }
+    }
+
+    res.render('tipps', {
+        gameday: gameday,
+        tipps: tipps
+    });
+});
+
 router.get('/setResult/:day&:results', async (req, res) => {
     // Beispiel: /ma/setResult/2018-06-14&2:1-1:1-3:1
     var results = req.params.results.split('-');

@@ -1,0 +1,71 @@
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+
+<div class="inline-form">
+    <div class="card border-0 shadow-lg p-3 mb-5 bg-white rounded" id="card" style="width: 95%;">
+        <div class="card-body">
+            <form novalidate>
+
+                    <div class="form-groud">
+                            <img class="card-img-top" src="tipps.png" alt="Card image cap" style="width: 80%; display: block; margin-left: auto; margin-right: auto;">
+                            <h6 align="center">vom <%= gameday.day %></h6>
+                            </br>
+                        </div>
+
+                <% for (i = 0; i < tipps.length; i++) { %>
+                    <div class="form-groud">
+                            <h4 style="font-family: Orbitron">
+                                <%= tipps[i].player %>
+                            </h4>
+                            </br>
+                        </div>
+
+                        <% for (g = 0; g < tipps[i].games.length; g++) { %>
+
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col-5">
+                                        <div class="form-group">
+                                            <label class="font-weight-bold" for="home<%= g %>"><%= tipps[i].games[g].homeTeam %></label>
+                                            <select disabled class="form-control" name="home<%= g %>" id="home<%= g %>">
+                                              <option><%= tipps[i].games[i].tipp.split(':')[0] %></option>
+                                            </select>
+                                          </div>
+                                    </div>
+                                    <div class="col-2">
+                                            <label for="vs<%= g %>" class="text-light">
+                                                text
+                                                </label>
+                                                <input type="text" id="vs<%= g %>" readonly class="form-control-plaintext text-center" value="vs.">
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="form-group">
+                                            <label class="font-weight-bold" for="away<%= g %>"><%= tipps[i].games[g].awayTeam %></label>
+                                            <select disabled class="form-control" name="away<%= g %>" id="away<%= g %>">
+                                              <option><%= tipps[i].games[i].tipp.split(':')[1] %></option>
+                                            </select>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            
+        
+                            <% } %>
+                        </br>
+                <% } %>
+                        </br>
+                        <div class="form-group">
+                            <button class="btn btn-dark btn-lg btn-block" formmethod="GET" formaction="/" formtarget="_self">Zurück</button>
+                        </div>
+
+            </form>
+        </div>
+    </div>
+</div>

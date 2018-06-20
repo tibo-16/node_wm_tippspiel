@@ -11,6 +11,12 @@
     border:1px solid #021a40;
 }
 
+@font-face {
+    font-family: Orbitron;
+    src: url('orbitron-bold.otf');
+    font-weight: bold;
+}
+
 .centered-form {
     display: flex;
     align-items: center;
