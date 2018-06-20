@@ -34,7 +34,7 @@
                                         <div class="form-group">
                                             <label class="font-weight-bold" for="home<%= g %>"><%= tipps[i].games[g].homeTeam %></label>
                                             <select disabled class="form-control" name="home<%= g %>" id="home<%= g %>">
-                                              <option><%= tipps[i].games[i].tipp.split(':')[0] %></option>
+                                              <option><%= tipps[i].games[g].tipp.split(':')[0] %></option>
                                             </select>
                                           </div>
                                     </div>
@@ -48,7 +48,7 @@
                                         <div class="form-group">
                                             <label class="font-weight-bold" for="away<%= g %>"><%= tipps[i].games[g].awayTeam %></label>
                                             <select disabled class="form-control" name="away<%= g %>" id="away<%= g %>">
-                                              <option><%= tipps[i].games[i].tipp.split(':')[1] %></option>
+                                              <option><%= tipps[i].games[g].tipp.split(':')[1] %></option>
                                             </select>
                                           </div>
                                     </div>

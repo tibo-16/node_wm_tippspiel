@@ -163,7 +163,7 @@ router.get('/ranking', async (req, res) => {
 });
 
 router.get('/tipps', async (req, res) => {
-    const gameday = await GameDay.findOne({completed: true}).sort({_id: 'desc'});
+    const gameday = await GameDay.findOne({completed: true}).sort({day: 'desc'}).limit(1);
     if (!gameday) {
         return res.status(404).render('info', {
             message: "Kein Spieltag gefunden!"
