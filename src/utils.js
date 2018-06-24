@@ -1,4 +1,8 @@
 const _ = require('lodash');
+var {mongoose} = require('./db/mongoose');
+var {GameDay} = require('./models/gameday');
+var {Tipp} = require('./models/tipp');
+var {Ranking} = require('./models/ranking');
 
 const calculatePoints = (result, tipp) => {
     if (result === tipp) {
@@ -65,7 +69,31 @@ const getRanking = (ranking) => {
     }
 };
 
+const rankingTest = async () => {
+    const gamedays = await GameDay.find({completed: true});
+    const names = ["Fabi", "Maddin", "Robert", "Rudi", "Tobi"];
+
+    for (n = 0; n < names.length; n++) {
+        var pointsForName = 0;
+
+        for (i = 0; i < gamedays.length; i++) {
+            const tipp = await Tipp.findOne({
+                day: gamedays[i].day,
+                player: names[n]
+            });
+
+            for (g = 0; g < gamedays[i].games.length; g++) {
+                const points = calculatePoints(gamedays[i].games[g].result, tipp.games[g].tipp);
+                pointsForName += points;
+            }
+        }
+
+        console.log(`${names[n]}: ${pointsForName}`);
+    }
+};
+
 module.exports = {
     calculatePoints,
-    getRanking
+    getRanking,
+    rankingTest
 };

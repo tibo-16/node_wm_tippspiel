@@ -7,7 +7,7 @@ var {mongoose} = require('./db/mongoose');
 var {GameDay} = require('./models/gameday');
 var {Tipp} = require('./models/tipp');
 var {Ranking} = require('./models/ranking');
-const {calculatePoints, getRanking} = require('./utils');
+const {calculatePoints, getRanking, rankingTest} = require('./utils');
 
 moment.locale('de');
 
@@ -18,6 +18,7 @@ router.get('/ma', (req, res) => {
 });
 
 router.get('/', (req, res) => {
+    rankingTest();
     res.render('index');
 });
 
