@@ -18,7 +18,7 @@ router.get('/ma', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    rankingTest();
+    //rankingTest();
     res.render('index');
 });
 
