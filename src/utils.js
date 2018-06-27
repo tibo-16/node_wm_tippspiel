@@ -88,7 +88,7 @@ const rankingTest = async () => {
             }
         }
 
-        console.log(`${names[n]}: ${pointsForName}`);
+        //console.log(`${names[n]}: ${pointsForName}`);
     }
 };
 
