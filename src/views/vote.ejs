@@ -18,7 +18,10 @@
                     <h4 style="font-family: Orbitron">
                         <%= name %>
                     </h4>
-                    <h6 id="timer"></h6>
+                    <h6 id="timer">Berechne verbliebene Zeit...</h6>
+                    <% if (name == "Achtelfinale" || name == "Viertelfinale" || name == "Halbfinale" || name == "Final") { %>
+                        <h6><b>Das Ergebnis nach der Verlängerung zählt!</b></h6>
+                    <% } %>
                     </br>
                 </div>
 
@@ -113,8 +116,8 @@
       var seconds = duration.seconds();
     
       // Display the result in the element with id="demo"
-      document.getElementById("timer").innerHTML = "Zeit übrig: " + days + "d " + hours + "h "
-      + minutes + "m " + seconds + "s ";
+      document.getElementById("timer").innerHTML = "Zeit verbleibend: " + days + "Tage " + hours + "Std. "
+      + minutes + "Min. " + seconds + "Sek. ";
     
       // If the count down is finished, write some text 
       if (duration < 0) {
