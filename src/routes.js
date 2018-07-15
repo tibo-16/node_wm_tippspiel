@@ -333,7 +333,7 @@ router.get('/backupRanking', async (req, res) => {
         else {
             var ranking = await Ranking.find();
 
-            for (i = 0; i < tipp.length; i++) {
+            for (i = 0; i < ranking.length; i++) {
                 fs.writeFile(`src/public/backup/ranking/ranking-${ranking[i].day}.json`, JSON.stringify(ranking[i].toJSON()), 'utf8', (err) => {
                     console.log(err);
                 });
