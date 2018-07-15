@@ -21,7 +21,8 @@ router.get('/ma', (req, res) => {
 
 router.get('/', (req, res) => {
     //rankingTest();
-    res.render('index');
+    //res.render('index');
+    res.redirect('/ranking');
 });
 
 var names = ['Fabi', 'Maddin', 'Robert', 'Rudi', 'Tobi']
