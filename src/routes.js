@@ -2,6 +2,8 @@ const express = require('express');
 var moment = require('moment');
 const {ObjectID} = require('mongodb');
 const bodyParser = require('body-parser');
+const fs = require('fs');
+var mkdirp = require('mkdirp');
 
 var {mongoose} = require('./db/mongoose');
 var {GameDay} = require('./models/gameday');
@@ -283,6 +285,42 @@ router.get('/createTippTest', (req, res) => {
         res.render('index');
     }, (err) => {
         res.status(400).send(err);
+    });
+});
+
+router.get('/backupGamedays', async (req, res) => {
+    var dir = 'src/public/backup/gamedays';
+
+    mkdirp(dir, async function (err) {
+        if (err) res.sendStatus(404);
+        else {
+            var gameday = await GameDay.find();
+
+            for (i = 0; i < gameday.length; i++) {
+                fs.writeFile(`src/public/backup/gamedays/gameday-${gameday[i].day}.json`, JSON.stringify(gameday[i].toJSON()), 'utf8', (err) => {
+                    console.log(err);
+                });
+            }
+            res.sendStatus(200);
+        }
+    });
+});
+
+router.get('/backupTipps', async (req, res) => {
+    var dir = 'src/public/backup/tipps';
+
+    mkdirp(dir, async function (err) {
+        if (err) res.sendStatus(404);
+        else {
+            var tipp = await Tipp.find();
+
+            for (i = 0; i < tipp.length; i++) {
+                fs.writeFile(`src/public/backup/tipps/tipp-${tipp[i].day}.json`, JSON.stringify(tipp[i].toJSON()), 'utf8', (err) => {
+                    console.log(err);
+                });
+            }
+            res.sendStatus(200);
+        }
     });
 });
 
