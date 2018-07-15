@@ -316,7 +316,7 @@ router.get('/backupTipps', async (req, res) => {
             var tipp = await Tipp.find();
 
             for (i = 0; i < tipp.length; i++) {
-                fs.writeFile(`src/public/backup/tipps/tipp-${tipp[i].day}.json`, JSON.stringify(tipp[i].toJSON()), 'utf8', (err) => {
+                fs.writeFile(`src/public/backup/tipps/tipp-${tipp[i].day}-${tipp[i].player}.json`, JSON.stringify(tipp[i].toJSON()), 'utf8', (err) => {
                     console.log(err);
                 });
             }
@@ -334,7 +334,7 @@ router.get('/backupRanking', async (req, res) => {
             var ranking = await Ranking.find();
 
             for (i = 0; i < ranking.length; i++) {
-                fs.writeFile(`src/public/backup/ranking/ranking-${ranking[i].day}.json`, JSON.stringify(ranking[i].toJSON()), 'utf8', (err) => {
+                fs.writeFile(`src/public/backup/ranking/ranking.json`, JSON.stringify(ranking[i].toJSON()), 'utf8', (err) => {
                     console.log(err);
                 });
             }
