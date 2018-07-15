@@ -324,4 +324,22 @@ router.get('/backupTipps', async (req, res) => {
     });
 });
 
+router.get('/backupRanking', async (req, res) => {
+    var dir = 'src/public/backup/ranking';
+
+    mkdirp(dir, async function (err) {
+        if (err) res.sendStatus(404);
+        else {
+            var ranking = await Ranking.find();
+
+            for (i = 0; i < tipp.length; i++) {
+                fs.writeFile(`src/public/backup/ranking/ranking-${ranking[i].day}.json`, JSON.stringify(ranking[i].toJSON()), 'utf8', (err) => {
+                    console.log(err);
+                });
+            }
+            res.sendStatus(200);
+        }
+    });
+});
+
 module.exports = router;
